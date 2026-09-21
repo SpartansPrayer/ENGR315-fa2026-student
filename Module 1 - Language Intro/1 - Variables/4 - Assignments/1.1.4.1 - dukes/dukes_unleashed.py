@@ -14,6 +14,24 @@ Note: this problem does not require the "compounding interest" formula from the 
 
 ### Your code here ###
 
-in_state_gift = 0
 
-out_state_gift = 0
+
+in_tuition= 30792
+out_tuition = 47882
+rate = 5#%   # interest rate applied to deposit (will be divided by 100)
+
+in_state_gift = in_tuition/((rate/100))
+out_state_gift = out_tuition/((rate/100))
+
+req_in = in_state_gift
+req_out = out_state_gift
+
+# use an over-loaded form of print() to set out each element of the string
+print("Return rate on gift over $1000000.00 is ", rate, "%")
+print(f"In-state tuition per student: ${in_tuition:.2f}")
+print(f"Required donation to cover one student's in-state tuition is ${req_in:.2f}")
+print(f"Out-of-state tuition per student: ${out_tuition:.2f}")
+print(f"Required donation to cover one student's out-of-state tuition is ${req_out:.2f}")
+
+
+

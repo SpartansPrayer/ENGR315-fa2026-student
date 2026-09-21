@@ -1,3 +1,10 @@
+#Given a string containing English words, translate the sentence into [Pig Latin](https://en.wikipedia.org/wiki/Pig_Latin). 
+#Spilts() will separate a sting into a list of words. Your code will modify each word and then re-assemble into a final String.
+#Utilize the following rules:
+
+#- If word starts with consonant, place starting letter on tail and append ”ay”
+#- If word start with vowel, append “vay”
+#- If word is less than 3 letters, do not modify.
 # helpful function to see if word starts with vowel
 def starts_with_vowel(word):
     """
@@ -37,18 +44,21 @@ for word in words:
     if len(word) < 3:
         # place the word in the pig_latin list
         ### your code here ###
+        pig_latin.append(word)
         continue
 
     # starts with vowel, modify accordingly and put in list
     elif starts_with_vowel(word) == True:
         # modify the word and place in pig_latin list
         ### your code here ###
+        pig_latin.append(word + "vay")
         continue
 
     # starts with consonant, modify accordingly  and put in list
     else:
         # modify word and place in pig_latin list
         ### your code here ###
+        pig_latin.append(word[1:] + word[0] + "ay")
         continue
 
 # a new sentence in which you will re-assemble each of the modified words
@@ -60,3 +70,4 @@ for w in pig_latin:
 
 # print out the "pig-latin" sentence
 print("The pig-latin version is: ", new_sentence)
+
