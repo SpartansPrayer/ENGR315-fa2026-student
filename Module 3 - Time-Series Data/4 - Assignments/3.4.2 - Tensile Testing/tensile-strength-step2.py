@@ -62,7 +62,12 @@ def calculate_stress(force, sample_diameter):
 
     ### YOUR SOLUTION FROM STEP 1 TEMPLATE HERE ###
 
-    return None
+    area = math.pi * (sample_diameter / 2)**2
+   
+    stress = (force * 1000) / area
+    
+
+    return stress
 
 
 def calculate_max_strength_strain(strain, stress):
@@ -76,10 +81,10 @@ def calculate_max_strength_strain(strain, stress):
     """
 
     # calculate the maximum stress experienced
-    ultimate_tensile_stress = -1
+    ultimate_tensile_stress = np.max(stress)
 
     # calculate the maximum strain experienced
-    fracture_strain = -1
+    fracture_strain = np.max(strain)
 
     return ultimate_tensile_stress, fracture_strain
 

@@ -61,8 +61,12 @@ def calculate_stress(force, sample_diameter):
     """
 
     ### YOUR SOLUTION FROM STEP 1 TEMPLATE HERE ###
+    area = math.pi * (sample_diameter / 2)**2
+   
+    stress = (force * 1000) / area
+    
 
-    return None
+    return stress
 
 
 def calculate_max_strength_strain(strain, stress):
@@ -74,10 +78,13 @@ def calculate_max_strength_strain(strain, stress):
     Ultimate Tensile Stress: the maximum stress experienced
     Fracture Strain: the maximum strain experienced before fracture
     """
-
-    ### YOUR SOLUTION FROM STEP 2 TEMPLATE HERE ###
-
-    return -1, -1
+   # calculate the maximum stress experienced
+    ultimate_tensile_stress = np.max(stress)
+    
+        # calculate the maximum strain experienced
+    fracture_strain = np.max(strain)
+    
+    return ultimate_tensile_stress, fracture_strain
 
 def calculate_elastic_modulus(strain, stress):
     """
@@ -97,7 +104,17 @@ def calculate_elastic_modulus(strain, stress):
     intercept = None
 
     ### YOUR SOLUTION FROM STEP 3 TEMPLATE HERE ###
+    peak_stress = np.max(stress) * 0.40
 
+
+    diffs = np.abs(stress - peak_stress)
+    
+    linear_index = np.argmin(diffs)
+
+    linear_stress = stress[:linear_index + 1]
+    linear_strain = strain[:linear_index + 1]
+
+    slope, intercept = np.polyfit(linear_strain, linear_stress, 1)
     return linear_index, slope, intercept
 
 def calculate_percent_offset(slope, strain, stress):
@@ -115,14 +132,16 @@ def calculate_percent_offset(slope, strain, stress):
     offset = 0.002
 
     # calculate the offset line: y=m(x-0.002) + 0
-    offset_line = None
+    offset_line = slope * (strain - offset)
 
     # measure distance from all points on graph to this line. Consider using the
     # abs() method to ensure values are positive
-    distance = None
-
+    distance = np.abs(stress - offset_line)
+    indices = np.where(strain >= offset)[0]
+    if len(indices) == 0:
+        return None, -1
     # use argmin to find the index where the distance is minimal
-    intercept_index = -1
+    intercept_index = indices[np.argmin(distance[indices])]
 
     return offset_line, intercept_index
 
