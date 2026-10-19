@@ -111,8 +111,8 @@ def calculate_elastic_modulus(strain, stress):
     
     linear_index = np.argmin(diffs)
 
-    linear_stress = stress[:linear_index + 1]
-    linear_strain = strain[:linear_index + 1]
+    linear_stress = stress[0:linear_index]
+    linear_strain = strain[0:linear_index]
 
     slope, intercept = np.polyfit(linear_strain, linear_stress, 1)
     return linear_index, slope, intercept
